@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class 后缀表达式 {
 
-    static char[][] operators = {
+    private static char[][] operators = {
        // #   (   )   *   ·  |
         {'=','>','E','>','>','>'},  //#
         {'E','>','=','>','>','>'},  //(
@@ -19,7 +19,7 @@ public class 后缀表达式 {
         {'<','>','<','>','>','>'}   //|
     };
 
-    static int getOperatorSub(char Opt) throws Exception{
+    private static int getOperatorSub(char Opt) throws Exception{
         switch (Opt)
         {
             case '#':  return 0;
@@ -32,17 +32,15 @@ public class 后缀表达式 {
         }
     }
 
-    static char compareOperator(char op1, char op2) throws Exception {
+    private static char compareOperator(char op1, char op2) throws Exception {
         return (operators[getOperatorSub(op2)][getOperatorSub(op1)]);
     }
 
-    static boolean isOperator(char ch){
-        if (ch == '(' || ch == ')' || ch == '*' || ch == '·' || ch == '|' || ch == '#' )
-            return true;
-        return false;
+    private static boolean isOperator(char ch){
+        return  (ch == '(' || ch == ')' || ch == '*' || ch == '·' || ch == '|' || ch == '#' );
     }
 
-    static void chuli(String zhong,int currentSubscript,Stack<Character> fuhao,StringBuffer str) throws Exception {
+    private static void chuli(String zhong,int currentSubscript,Stack<Character> fuhao,StringBuffer str) throws Exception {
         switch (compareOperator(zhong.charAt(currentSubscript),fuhao.peek())){
             case '>'://入栈
                 fuhao.push(zhong.charAt(currentSubscript));
@@ -59,7 +57,7 @@ public class 后缀表达式 {
         }
     }
 
-    static String 中缀表达式转后缀(String zhong) throws Exception {
+    private static String Zhong2Hou(String zhong) throws Exception {
         StringBuffer str = new StringBuffer();
         Stack<Character> fuhao = new Stack<Character>();
         //初始化栈等信息
@@ -67,10 +65,7 @@ public class 后缀表达式 {
         zhong += "#";
         //读取符号
         int currentSubscript = 0;
-        while (!fuhao.empty())
-        {
-//            if(currentSubscript >= zhong.length())
-//                break;
+        while (!fuhao.empty()) {
             if(zhong.charAt(currentSubscript) == ' ')
                 currentSubscript++;
             if (isOperator(zhong.charAt(currentSubscript)))//判断是不是字符
@@ -84,14 +79,43 @@ public class 后缀表达式 {
         return str.toString();
     }
 
-    String 添加连接符号(String biaodashi)
-    {
-        return "";
+    private static boolean isNeedDian(Character c1, Character c2){
+        if(c1 == ')' || c1== '*' || !isOperator(c1)) {
+//            System.out.print("char1");
+            return  (c2 == '(' || !isOperator(c2));
+        }
+        return false;
+    }
+
+    private static String addPoint(String biaodashi){
+        StringBuilder str = new StringBuilder();
+        str.append(biaodashi.charAt(0));
+        for(int i = 0;i<biaodashi.length()-1 ;i++) {
+            char c1 = biaodashi.charAt(i);
+            char c2 = biaodashi.charAt(i+1);
+            if(isNeedDian(c1,c2)){
+                str.append("·").append(c2);
+            }else {
+                str.append(c2);
+            }
+        }
+        return str.toString();
     }
 
     public static void main(String[] args) throws Exception {
+//        String zhong = "(a·b|c*)·a·b*";
+        String test = "(a|b)*c|def(g|h*)(cg|gg)*";
 
-        String zhong = "(a·b|c*)·a·b*";
-        System.out.println(中缀表达式转后缀(zhong));
+        long start = System.currentTimeMillis();
+        StringBuffer stringBuilder = new StringBuffer();
+        for (int i =0;i<1000;i++)
+        {
+            test+= "a";
+//            System.out.println("转成后缀表达式"+Zhong2Hou(addPoint(test)));
+            Zhong2Hou(addPoint(test));
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(stringBuilder);
+        System.out.println("1000次总共使用时间"+(end-start)+"ms");
     }
 }

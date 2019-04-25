@@ -8,39 +8,49 @@ package zx.learn;
 public class MergeString {
 
     public static void main(String[] args) {
-        String str = " select * from (SELECT   " +
-                "         T_STGL_CLUB_ACTIVITY.*,  " +
-                "         clubName,  " +
-                "     ISNULL(clubLinkName,'无') AS clubLinkName,   " +
-                "     ISNULL(memberNames,'无') AS memberNames  " +
-                "FROM T_STGL_CLUB_ACTIVITY  " +
-                "LEFT JOIN T_STGL_ACTIVITY_CLUB_LINK  " +
-                "    ON T_STGL_CLUB_ACTIVITY.clubActivityId = T_STGL_ACTIVITY_CLUB_LINK.clubActivityId  " +
-                "        AND ifMain = 1  " +
-                "LEFT JOIN T_STGL_CLUB  " +
-                "    ON T_STGL_ACTIVITY_CLUB_LINK.clubId = T_STGL_CLUB.clubId   " +
-                "LEFT JOIN   " +
-                "    (SELECT clubActivityId,  " +
-                "        clubLinkName = stuff(  " +
-                "        (SELECT ',' + clubName  " +
-                "        FROM T_STGL_ACTIVITY_CLUB_LINK tsacl1,T_STGL_CLUB tsc1  " +
-                "        WHERE tsacl.clubActivityId = tsacl1.clubActivityId  " +
-                "                AND tsacl1.clubId = tsc1.clubId  " +
-                "                AND tsacl1.ifMain = 0 for xml path('')),1,1 ,'')  " +
-                "        FROM T_STGL_ACTIVITY_CLUB_LINK tsacl,T_STGL_CLUB tsc  " +
-                "        WHERE tsacl.clubId = tsc.clubId  " +
-                "        GROUP BY  clubActivityId) clubLink  " +
-                "        ON T_STGL_CLUB_ACTIVITY.clubActivityId = clubLink.clubActivityId  " +
-                "LEFT JOIN   " +
-                "    (SELECT tscam.clubActivityId,  " +
-                "        memberNames = stuff(  " +
-                "        (SELECT ',' + studentName  " +
-                "        FROM T_STGL_CLUB_ACTIVITY_MEMBER tscam1  " +
-                "        WHERE tscam.clubActivityId = tscam1.clubActivityId for xml path('')),1,1 ,'')  " +
-                "        FROM T_STGL_CLUB_ACTIVITY_MEMBER tscam  " +
-                "        GROUP BY  tscam.clubActivityId) memberLink  " +
-                "        ON T_STGL_CLUB_ACTIVITY.clubActivityId = memberLink.clubActivityId  " +
-                " where schoolYear = :schoolYear and semester = :semester ) totol";
-        System.out.println(str);
+        String str = " teachClassId,  " +
+                "    courseName,  " +
+                "    classNames,  " +
+                "    mainTeacherId,  " +
+                "    mainTeacherName,  " +
+                "    examTypeId,  " +
+                "    examType,  " +
+                "    theoryHours,  " +
+                "    studentNum,  " +
+                "    advStatusId,  " +
+                "    advStatusName,  " +
+                "    ppaStatusId,  " +
+                "    ppaStatusName";
+        String[] strings = str.split(",");
+//        System.out.println(str);
+//        for (String string : strings) {
+//            String asName = " as pjc"+string.trim().toUpperCase().charAt(4)+string.trim().substring(5,string.trim().length())+",";
+//            System.out.println(string.trim() + asName);
+//        }
+
+//        for (String string : strings) {
+//            String getName = "get"+string.trim().toUpperCase().charAt(0)+string.trim().substring(1,string.trim().length())+"();";
+//            System.out.print(getName);
+//        }
+//        for (String string : strings) {
+//            String getName = "get"+string.trim().toUpperCase().charAt(0)+string.trim().substring(1,string.trim().length())+"()";
+//            String objectPut = "object.put(\""+string.trim()+"\",info."+getName+");";
+//            System.out.println(objectPut);
+//        }
+//        String test = "1234";
+//        System.out.println(test);
+
+
+        String mergeStr = "and  mainTeacherId in (select JSDM  " +
+                "                        from T_XG_JYS_JS  " +
+                "                        where JYSDM = :jsyId )  " +
+                " and schoolYear = :schoolYear and semester = :semester  ";
+
+
+
+        System.out.print(mergeStr);
     }
+
+
+
 }
