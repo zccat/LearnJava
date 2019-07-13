@@ -1,9 +1,7 @@
 package zx.learn.EL;
 
-import com.sun.org.apache.xalan.internal.extensions.ExpressionContext;
 import lombok.Data;
 import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.Expression;
 import org.springframework.expression.spel.SpelCompilerMode;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpression;
