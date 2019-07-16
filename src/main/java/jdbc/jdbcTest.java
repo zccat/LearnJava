@@ -1,11 +1,11 @@
 package jdbc;
 
-import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Java Date Base Connection
 public class jdbcTest {
 
     public static void main(String[] args) {
