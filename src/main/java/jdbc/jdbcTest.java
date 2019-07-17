@@ -13,7 +13,7 @@ public class jdbcTest {
 
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/jdbc_demo?characterEncoding=UTF-8&serverTimezone=UTC",
                     "root", "root");
 
@@ -25,7 +25,7 @@ public class jdbcTest {
 //            statement.execute(sql);
 
 //            通过prepareStatement执行
-//            addOne(7, "Google", "www.gee.ee", 1, "country");
+//            addOne(8, "CC", "www.CC.cc", 1, "CN");
 
 
 //            查询语句
@@ -48,6 +48,8 @@ public class jdbcTest {
 
             System.out.println("执行成功");
 
+            statement.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
