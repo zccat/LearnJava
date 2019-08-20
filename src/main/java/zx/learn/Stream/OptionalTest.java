@@ -29,9 +29,9 @@ public class OptionalTest {
         List<String> wordList = Arrays.asList(contents.split("\\PL+"));
 
         //orElse 方法 当为空的时候 会取括号中的值代替
-        Optional<String> optionalValue = wordList.stream()
+        Optional<String> optionalValue = wordList.parallelStream()
                 .filter(s -> s.contains("fred"))
-                .findFirst();
+                .findAny();
         System.out.println(optionalValue.orElse("No word")+" contains fred");
 
         Optional<String> optionalString = Optional.empty();

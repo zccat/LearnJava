@@ -44,7 +44,8 @@ class TraceHandler implements InvocationHandler {
         target = object;
     }
 
-    //他的意思是  不管调用源对象的任何方法 ， 这个程序的invoke方法都会被调用  你就可以在这里添加一些东西  例如 这里 输出了调用源  方法名 参数名 等
+    //他的意思是  不管调用源对象的任何方法 ， 这个程序的invoke方法都会被调用  你就可以在这里添加一些东西
+    // 例如 这里 输出了调用源  方法名 参数名 等
     @Override
     public Object invoke(Object o, Method method, Object[] args) throws Throwable {
         System.out.print(target);
