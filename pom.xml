@@ -90,6 +90,19 @@
         </dependency>
 
 
+        <!-- Redis 学习 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>1.4.7.RELEASE</version>
+        </dependency>
+
         <!-- PDF -->
         <!--<dependency>-->
             <!--<groupId>com.itextpdf</groupId>-->
