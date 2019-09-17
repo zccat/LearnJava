@@ -3,6 +3,7 @@ package zx.learn.redis;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -27,25 +28,40 @@ public class RedisTest {
 
     @Test
     public void testRedisObj() {
+//        ApplicationContext contexts = new AnnotationConfigApplicationContext("面试");
+
+//        Offer offer = contexts.getBean("offer");
+
+
         ApplicationContext context = new AnnotationConfigApplicationContext(RedisConfig.class);
         RedisTemplate template = context.getBean(RedisTemplate.class);
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("123", "hello");
-        properties.put("abc", 456 + "");
+//        Map<String, Object> properties = new HashMap<>();
+//        properties.put("123", "hello");
+//        properties.put("abc", 456 + "");
 
 
-        template.opsForHash().putAll("hhhhash", properties);
+//        template.opsForHash().putAll("hhhhash", properties);
 
-        Map<Object, Object> ans = template.opsForHash().entries("hhhhash");
+//        Map<Object, Object> ans = template.opsForHash().entries("hhhhash");
 
 //        template.opsForList().rightPushAll("list_key", "1", "2", "3", "4", "5");
 
-        template.opsForSet().isMember("key", "ob");
+
+        template.boundHashOps("key").put("hk1", "hv1");
+        template.boundHashOps("key").put("hk2", "hv2");
+        template.boundHashOps("key").put("hk3", "hv3");
+
+        BoundHashOperations<Object, Object, Object> res = template.boundHashOps("key");
+
+        System.out.println(res.entries());
+
+
+//        template.opsForSet().isMember("key", "ob");
 
         //从右边弹出一个元素，如果不存在，等待 1 S
-        template.opsForList().rightPopAndLeftPush("key_key", "kk", 1, TimeUnit.SECONDS);
+//        template.opsForList().rightPopAndLeftPush("key_key", "kk", 1, TimeUnit.SECONDS);
 
-        System.out.println("ans: " + ans);
+//        System.out.println("ans: " + ans);
 //        List<String> strings = template.opsForList().range("list_key", 0, -1);
 //        System.out.println(strings);
     }

@@ -1,5 +1,6 @@
 package zx.learn.redis.config;
 
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.jcache.config.JCacheConfigurerSupport;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import zx.learn.redis.RedisLock;
 
 @Configuration
 @PropertySource("classpath:redis.properties")
@@ -40,20 +42,30 @@ public class RedisConfig extends JCacheConfigurerSupport {
     }
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, String> redis = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redis = new RedisTemplate<>();
         redis.setConnectionFactory(redisConnectionFactory);
 
 
         // 设置redis的String/Value的默认序列化方式
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        redis.setKeySerializer(stringRedisSerializer);
-        redis.setValueSerializer(stringRedisSerializer);
-        redis.setHashKeySerializer(stringRedisSerializer);
-        redis.setHashValueSerializer(stringRedisSerializer);
+//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+//        redis.setKeySerializer(stringRedisSerializer);
+//        redis.setValueSerializer(stringRedisSerializer);
+//        redis.setHashKeySerializer(stringRedisSerializer);
+//        redis.setHashValueSerializer(stringRedisSerializer);
 
 
         redis.afterPropertiesSet();
         return redis;
     }
+
+
+    @Bean
+    public RedisLock redisLock() {
+        return new RedisLock();
+    }
+
+//    @Property
+//    String debut = "false";
+
 }
