@@ -11,7 +11,10 @@ public class leetcode14 {
 
     public static void main(String[] args) {
 
-        String[] strings = new String[]{"flower", "flow", "flight"};
+//        String[] strings = new String[]{"c","c"};
+//        String[] strings = new String[]{"flower", "flow", "flight"};
+
+        String[] strings = new String[]{"acc","a","ccc"};
         System.out.println(longestCommonPrefix(strings));
 
 
@@ -19,21 +22,37 @@ public class leetcode14 {
 
     public static String longestCommonPrefix(String[] strs) {
 
-        char[] first = strs[0].toCharArray();
-        int len = first.length;
-        int resLen = 0;
-        for (String str : strs) {
-            char[] chars = str.toCharArray();
-            for (int i = 0; i < Math.min(len, str.length()); i++) {
-                if (chars[i] == first[i]) {
-                    if (i > resLen) {
-                        resLen = i;
-                    }
-                } else {
-                    break;
-                }
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+
+        String first = strs[0];
+        int resLen = first.length();
+        int temp = 0;
+        for (int i = 1; i < strs.length; i++) {
+            temp = getSameLength(first, strs[i]);
+            if (temp < resLen) {
+                resLen = temp;
             }
         }
-        return strs[0].substring(0, resLen -1);
+
+        return first.substring(0, resLen);
+    }
+
+    public static int getSameLength(String str, String other) {
+        if (str == null || other == null) {
+            return 0;
+        }
+
+        int res = 0;
+        for (int i = 0; i < Math.min(str.length(), other.length()); i++) {
+            if (str.charAt(i) == other.charAt(i)) {
+                res = i + 1;
+            }else
+                break;
+        }
+        System.out.println(str + " and " + other + " same length " + res);
+
+        return res;
     }
 }
