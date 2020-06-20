@@ -5,7 +5,7 @@ public class Timer {
   private long start = System.nanoTime();
   public long duration() {
 //    NANOSECONDS.toMillis()
-    return NANOSECONDS.toMillis(
+    return NANOSECONDS.toNanos(
       System.nanoTime() - start);
   }
   public static long duration(Runnable test) {
