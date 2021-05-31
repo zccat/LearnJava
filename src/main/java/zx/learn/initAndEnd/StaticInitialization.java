@@ -54,3 +54,6 @@ public class StaticInitialization {
     static Table table = new Table();
     static Cupboard cupboard = new Cupboard();
 }
+
+//static -->  子类  -->  父类
+// 类  成员变量 -->  构造器

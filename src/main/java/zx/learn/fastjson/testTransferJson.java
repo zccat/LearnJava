@@ -1,8 +1,11 @@
 package zx.learn.fastjson;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.naming.ldap.HasControls;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Auther: 胡志新
@@ -11,61 +14,14 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class testTransferJson {
 
-    public static void main(String[] args) {
-        JSONObject jsonObject = new JSONObject();
-        //    String name;
-        //    String nickName;
-        //    int age;
-        //    String studentId;
-//        jsonObject.put("name","张三");
-        
-        
-        String str = "teachClassId,  " +
-                "       schoolYear,  " +
-                "       semester,  " +
-                "       courseId,  " +
-                "       courseName,  " +
-                "       examPropId,  " +
-                "       examProp,  " +
-                "       examTypeId,  " +
-                "       examType,  " +
-                "       offeredCollegeId,  " +
-                "       offeredCollegeName,  " +
-                "       classNames,  " +
-                "       teacherNames,  " +
-                "       theoryHours,  " +
-                "       expHours,  " +
-                "       totalHours,  " +
-                "       mainTeacherId,  " +
-                "       mainTeacherName,  " +
-                "       createrId,  " +
-                "       createrName,  " +
-                "       createTime,  " +
-                "       ifJwcCreate,  " +
-                "       studentNum,  " +
-                "       maxClassNum,  " +
-                "       bkTime,  " +
-                "       jkTime,  " +
-                "       selfExamPlace,  " +
-                "       selfExamTimeBegin,  " +
-                "       selfExamTimeEnd,  " +
-                "       ifAdvExam,  " +
-                "       currentApplyId,  " +
-                "       syncGroupId";
-        
-        String[] strs = str.split(",");
-
-        StringBuilder result = new StringBuilder();
-        for (String s : strs) {
-            result.append(" "+s.trim()+" as "+s.trim()+ ", ") ;
-        }
-
-        System.out.println(result.toString());
-        
-
-        Student student = new Student("张三","刘关张",18,"1234567");
-        JSONObject object = (JSONObject) JSON.toJSON(student);
-        System.out.println(object.toJSONString());
+    public static void main(String[] args) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+        String s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+        System.out.println(s);
 
     }
 

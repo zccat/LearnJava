@@ -23,7 +23,7 @@ public class lambdaTest {
 //        });
 //
 
-        Timer t1 = new Timer(1000, event -> System.out.println(event));
+        Timer t1 = new Timer(1000, System.out::println);
         Timer t2 = new Timer(1000, System.out::println);
 
 //        t.start();

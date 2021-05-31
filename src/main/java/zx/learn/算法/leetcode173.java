@@ -1,11 +1,6 @@
 package zx.learn.算法;
 
-import org.apache.poi.ss.formula.functions.T;
-import sun.reflect.generics.tree.Tree;
 
-import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 public class leetcode173 {

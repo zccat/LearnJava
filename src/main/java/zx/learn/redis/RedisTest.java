@@ -26,6 +26,11 @@ import java.util.concurrent.TimeUnit;
 
 public class RedisTest {
 
+//    String s = """
+//    这里是文本块测试
+//    select * from table_name where field_name = value_a and field_name_b like '%sa%'
+//    """;
+
     @Test
     public void testRedisObj() {
 //        ApplicationContext contexts = new AnnotationConfigApplicationContext("面试");

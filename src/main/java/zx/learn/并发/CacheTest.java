@@ -1,12 +1,5 @@
 package zx.learn.并发;
 
-import com.sun.xml.internal.ws.resources.UtilMessages;
-
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * CPU 的 cache的测试

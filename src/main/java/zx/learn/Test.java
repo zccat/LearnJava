@@ -1,28 +1,16 @@
 package zx.learn;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import java.util.Arrays;
 
 public class Test {
-    public static void main(String args[]) throws InterruptedException {
-        Timer timer = new Timer();
-        System.out.println(LocalDateTime.now());
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("任務");
-                System.out.println(LocalDateTime.now());
-            }
-        }, new Date(System.currentTimeMillis() + 2000));
 
+    public static void main(String args[]) {
+        String[] strings = "admin^论文^禅与摩托车维修艺术.pdf".split("\\^");
+        System.out.println(Arrays.toString(strings));
 
-        Thread.sleep(5000);
-        System.out.println(LocalDateTime.now());
-        timer.cancel();
 
     }
 
 }
+
